@@ -41,45 +41,70 @@ console.log(playerSelection)
 // 2. 'playRound()' takes 2 parameters: 
 //     playRound(playerSelection, computerSelection)
 // 3. 'playRound()' RETURNS a string that declares the winner
+// 4. Added: 'playRound()' displays the score
 function playRound(playerSelection, computerSelection){
+
         if (playerSelection == computerSelection){
-        return result = `Draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
-        playerWin += 1
-        computerWin += 1
+
+            playerWin += 1
+            computerWin += 1
+            return `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
 
         } else if (playerSelection == 'rock'){
             if(computerSelection == 'scissors'){
-                return result = `You won! ${playerSelection} beats ${computerSelection}`         
+
                 playerWin += 1              
+                return `You won the round! ${playerSelection} beats ${computerSelection}` 
+
             } else {
-                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+
                 computerWin += 1
+                return `You lost the round! ${computerSelection} beats ${playerSelection}`         
+                
             }
         
         } else if (playerSelection == 'paper') {
             if(computerSelection == 'rock'){
-                return result = `You won! ${playerSelection} beats ${computerSelection}`         
-                playerWin += 1    
+
+                playerWin += 1  
+                return `You won the round! ${playerSelection} beats ${computerSelection}`         
+
             } else {
-                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+
                 computerWin += 1
+                return `You lost the round! ${computerSelection} beats ${playerSelection}`  
+                
             }
         
         } else if (playerSelection == 'scissors') {
             if(computerSelection == 'paper'){
-                return result = `You won! ${playerSelection} beats ${computerSelection}`         
+                
                 playerWin += 1 
+                return `You won the round! ${playerSelection} beats ${computerSelection}` 
+                
             } else {
-                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+                
                 computerWin += 1
+                return `You lost the round! ${computerSelection} beats ${playerSelection}`  
+                
             }
         }
     }
-
+    
+    //Who won the round?
     console.log(playRound(playerSelection, computerSelection)) 
-
+    //Show the overall score, in number of wins
+    console.log(`Score =>  Player  ${playerWin} : ${computerWin}  Computer`)
+    
+    
 // PLAY A 5-ROUND GAME
 // 1. Create a function 'game()' 
 // 2. 'game()' has 5-rounds 
 // 3. 'game()' keeps score at each round -- use console.log to diplay the results @ each round  
 // 4. 'game()' reports a winner or loser AT THE END OF THE GAME
+
+function game(){
+    //Come back to complete
+}
+console.log(`This is an individual round. 
+Current Score =>  Player  ${playerWin} : ${computerWin}  Computer`)
