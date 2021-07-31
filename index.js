@@ -24,9 +24,15 @@ console.log(computerSelection)
 
 // CREATE A PLAY FROM THE PLAYER: 
 // 1. create a function 'playerPlay()' that PROMPTS the player's input: ‘rock’, ‘paper’ or ‘scissors’
+function playerPlay(){
+    let result = prompt(`Please enter 'rock', 'paper' or 'scissors'`, `e.g: rock`)
+    result = result.toLowerCase()
+    return result
+}
 // 2. Assign the function to the player's play: 'playerSelection'
+playerSelection = playerPlay()
 // 3. 'playerSelection' is CASE-INSENSITIVE: transform player's input toLowerCase
-
+console.log(playerSelection)
 
 // PLAY A SINGLE ROUND (PLAYER vs COMPUTER)
 // 1. create a function 'playRound()' that plays a single round
