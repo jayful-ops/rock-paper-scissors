@@ -22,6 +22,7 @@ computerSelection = computerPlay()
 // 3. console.log(computerSelection) to check that the computer's play works
 console.log(computerSelection)
 
+
 // CREATE A PLAY FROM THE PLAYER: 
 // 1. create a function 'playerPlay()' that PROMPTS the player's input: ‘rock’, ‘paper’ or ‘scissors’
 function playerPlay(){
@@ -34,24 +35,48 @@ playerSelection = playerPlay()
 // 3. 'playerSelection' is CASE-INSENSITIVE: transform player's input toLowerCase
 console.log(playerSelection)
 
+
 // PLAY A SINGLE ROUND (PLAYER vs COMPUTER)
 // 1. create a function 'playRound()' that plays a single round
 // 2. 'playRound()' takes 2 parameters: 
 //     playRound(playerSelection, computerSelection)
 // 3. 'playRound()' RETURNS a string that declares the winner
-// 4. if (playerSelection == computerSelection){
-//      return result = `Draw! Your pick was ${playerSelection} and the computer's pick was         
-//                       ${computerSelection}` 
-//       playerWin += 1
-//       computerWin += 1
-//     } else if (playerSelection > computerSelection){
-//      return result = `You won! ${playerSelection} beats ${computerSelection}`         
-//       playerWin += 1              
-//     } else {
-//      return result = `You lost! ${computerSelection} beats ${playerSelection}`         
-//       computerWin += 1    
-//     }
+function playRound(playerSelection, computerSelection){
+        if (playerSelection == computerSelection){
+        return result = `Draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
+        playerWin += 1
+        computerWin += 1
 
+        } else if (playerSelection == 'rock'){
+            if(computerSelection == 'scissors'){
+                return result = `You won! ${playerSelection} beats ${computerSelection}`         
+                playerWin += 1              
+            } else {
+                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+                computerWin += 1
+            }
+        
+        } else if (playerSelection == 'paper') {
+            if(computerSelection == 'rock'){
+                return result = `You won! ${playerSelection} beats ${computerSelection}`         
+                playerWin += 1    
+            } else {
+                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+                computerWin += 1
+            }
+        
+        } else if (playerSelection == 'scissors') {
+            if(computerSelection == 'paper'){
+                return result = `You won! ${playerSelection} beats ${computerSelection}`         
+                playerWin += 1 
+            } else {
+                return result = `You lost! ${computerSelection} beats ${playerSelection}`         
+                computerWin += 1
+            }
+        }
+    }
+
+    console.log(playRound(playerSelection, computerSelection)) 
 
 // PLAY A 5-ROUND GAME
 // 1. Create a function 'game()' 
