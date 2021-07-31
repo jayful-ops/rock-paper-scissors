@@ -1,16 +1,26 @@
 //This app plays rock-paper-scissors against the computer
 
 //let playerWin = 0
+let playerWin = 0
 //let computerWin = 0
+let computerWin = 0
 //let playerSelection
+let playerSelection
 //let computerSelection
+let computerSelection
+const rockPaperScissors = ['rock', 'paper', 'scissors']
 
 
 // CREATE A PLAY FROM THE COMPUTER: 
 // 1. create a function 'computerPlay()' that RANDOMLY RETURNS either ‘rock’, ‘paper’ or ‘scissors’
+function computerPlay(){
+    let result = rockPaperScissors[Math.floor(Math.random()*3)]
+    return result
+}
 // 2. Assign the function to the computer's play: 'computerSelection'
+computerSelection = computerPlay()
 // 3. console.log(computerSelection) to check that the computer's play works
-
+console.log(computerSelection)
 
 // CREATE A PLAY FROM THE PLAYER: 
 // 1. create a function 'playerPlay()' that PROMPTS the player's input: ‘rock’, ‘paper’ or ‘scissors’
