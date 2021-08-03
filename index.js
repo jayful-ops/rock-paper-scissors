@@ -1,4 +1,4 @@
-//Rock-paper-scissors app: Player VS Computer
+//This app plays rock-paper-scissors against the computer
 let computerWin = 0
 let playerWin = 0
 let playerSelection
@@ -18,6 +18,7 @@ function playerPlay(){
     result = result.toLowerCase()
     return result 
 }
+
 // CREATE A SINGLE ROUND (PLAYER vs COMPUTER)
 function playRound(playerSelection, computerSelection){
     
