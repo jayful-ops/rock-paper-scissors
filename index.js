@@ -113,11 +113,10 @@ function getFinalScore(){
 }
 //REMATCH? If TRUTHY => play, else 'Thank you message'
 function gameOver(){
-    let newGame = prompt(`Would you like to play a new game?`, `yes/no`)
-    newGame = newGame.value 
+    let newGame = prompt('Would you like" to play a new game?','')
 
     if(newGame){
-        game()
+        console.log(game())
     } else {
         thankYouMessage = `Thank you for playing.`
         console.log(thankYouMessage)
