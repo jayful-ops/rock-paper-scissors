@@ -1,10 +1,9 @@
-//---------------> VERSION 2: <---------------
-//Cleaned up code
-//Allow player to enter wrong entry 
-//Falsy entry => prompt player to enter a valid entry (3 chances)
-//When entry is valid within 3 chances, move on to the next round of the game
+//This app pits a player against the computer in a game of rock-paper-scissors
 
-//This app plays rock-paper-scissors against the computer
+//---------------> VERSION 2: <---------------
+//note: playerPlay() allows 3 opportunities for the player to enter a truthy value in each round (and prompts the player to enter a correct entry if falsy value)
+//A valid entry within 3 tries allows for a round to be played and for the game move onto the next chronological round in the game
+
 let computerWin = 0
 let playerWin = 0
 let playerSelection
@@ -18,218 +17,107 @@ computerPlay = () =>{
     result = rockPaperScissors[Math.floor(Math.random()*3)]
     return result
 }
-// CREATE A PLAY FROM THE PLAYER: ’
+// CREATE A PLAY FROM THE PLAYER: 
 playerPlay = () => {
-    result = prompt(`Please enter 'rock', 'paper' or 'scissors'`, `e.g: rock`)
+    result = prompt(`Please enter one of the following:
+    rock
+    paper
+    scissors`, ``)
     result = result.toLowerCase()
-    return result 
+
+    //is result valid?
+    if((result) && (result == 'rock' || result == 'paper' || result == 'scissors')){
+        
+        return result   
+        
+    } else {
+        //1st time invalid entry 
+        result = prompt(`Invalid entry. Please enter one of the following:
+        rock
+        paper
+        scissors`, ``)
+        result = result.toLowerCase()
+        
+        //is result valid this time?
+        if(result && (result == 'rock' || result == 'paper' || result == 'scissors')){
+
+        return result    
+
+        } else {
+            //2nd time invalid entry
+            result = prompt(`Invalid entry. Please enter one of the following:
+            rock
+            paper
+            scissors`, ``)
+            result = result.toLowerCase()
+
+            //is result valid this time?
+            if((result) && (result == 'rock' || result == 'paper' || result == 'scissors')){
+                
+            return result
+
+            } else {
+                //3rd time invalid entry: 
+                gameOver()
+            }
+        }
+    }
 }
 
 // CREATE A SINGLE ROUND (PLAYER vs COMPUTER)
 playRound = (playerSelection, computerSelection) => {
-    
+    //computer plays
     computerSelection = computerPlay()
     console.log(computerSelection)
-
+    //player plays
     playerSelection = playerPlay()
     console.log(playerSelection)
-
-    if(playerSelection == computerSelection){    
-        playerWin += 1
-        computerWin += 1
-        result = `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
-        console.log(result) 
     
-    } else if(playerSelection == 'rock'){
-            if(computerSelection == 'scissors'){
-                
-                playerWin += 1              
-                result = `You won the round! ${playerSelection} beats ${computerSelection}` 
-                console.log(result) 
-        
-            } else{
-
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`   
-                console.log(result)                  
-            }
-    
-    } else if(playerSelection == 'paper') {
-            if(computerSelection == 'rock'){
-                
-                playerWin += 1  
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result) 
-
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-
-    } else if(playerSelection == 'scissors'){
-            if(computerSelection == 'paper'){
-                
-                playerWin += 1 
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result)                     
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-    } else{ //FALSY ENTRY: request truthy input from player - 1st chance
-        result = `Invalid entry. Please enter 1 of the 3 proposed options in the input below.`
-        console.log(result) 
-        playerSelection = playerPlay()
-        console.log(playerSelection)
-
         if(playerSelection == computerSelection){    
-        playerWin += 1
-        computerWin += 1
-        result = `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
-        console.log(result) 
-    
-        } else if(playerSelection == 'rock'){
-            if(computerSelection == 'scissors'){
-                
-                playerWin += 1              
-                result = `You won the round! ${playerSelection} beats ${computerSelection}` 
-                console.log(result) 
+            playerWin += 1
+            computerWin += 1
+            result = `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
+            console.log(result) 
         
-            } else{
+        } else if(playerSelection == 'rock'){
+                if(computerSelection == 'scissors'){
+                    
+                    playerWin += 1              
+                    result = `You won the round! ${playerSelection} beats ${computerSelection}` 
+                    console.log(result) 
+            
+                } else{
 
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`   
-                console.log(result)                  
-            }
-    
+                    computerWin += 1
+                    result = `You lost the round! ${computerSelection} beats ${playerSelection}`   
+                    console.log(result)                  
+                }
+        
         } else if(playerSelection == 'paper') {
-            if(computerSelection == 'rock'){
-                
-                playerWin += 1  
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result) 
+                if(computerSelection == 'rock'){
+                    
+                    playerWin += 1  
+                    result = `You won the round! ${playerSelection} beats ${computerSelection}`  
+                    console.log(result) 
 
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
+                } else{
+                    computerWin += 1
+                    result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
+                    console.log(result) 
+                }    
 
         } else if(playerSelection == 'scissors'){
-            if(computerSelection == 'paper'){
-                
-                playerWin += 1 
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result)                     
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-        }  else{ //FALSY ENTRY: request truthy input from player - 2nd chance
-        result = `Invalid entry. Please enter 1 of the 3 proposed options in the input below.`
-        console.log(result) 
-        playerSelection = playerPlay()
-        console.log(playerSelection)
-
-        if(playerSelection == computerSelection){    
-        playerWin += 1
-        computerWin += 1
-        result = `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
-        console.log(result) 
-    
-        } else if(playerSelection == 'rock'){
-            if(computerSelection == 'scissors'){
-                
-                playerWin += 1              
-                result = `You won the round! ${playerSelection} beats ${computerSelection}` 
-                console.log(result) 
-        
-            } else{
-
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`   
-                console.log(result)                  
-            }
-    
-        } else if(playerSelection == 'paper') {
-            if(computerSelection == 'rock'){
-                
-                playerWin += 1  
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result) 
-
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-
-        } else if(playerSelection == 'scissors'){
-            if(computerSelection == 'paper'){
-                
-                playerWin += 1 
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result)                     
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-        }   else{ //FALSY ENTRY: request truthy input from player - Final chance 
-        result = `LAST CHANCE: Invalid entry. Please enter 1 of the 3 proposed options in the input below.`
-        console.log(result) 
-        playerSelection = playerPlay()
-        console.log(playerSelection)
-
-        if(playerSelection == computerSelection){    
-        playerWin += 1
-        computerWin += 1
-        result = `This round is a draw! Your pick was ${playerSelection} and the computer's pick was ${computerSelection}.` 
-        console.log(result) 
-    
-        } else if(playerSelection == 'rock'){
-            if(computerSelection == 'scissors'){
-                
-                playerWin += 1              
-                result = `You won the round! ${playerSelection} beats ${computerSelection}` 
-                console.log(result) 
-        
-            } else{
-
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`   
-                console.log(result)                  
-            }
-    
-        } else if(playerSelection == 'paper') {
-            if(computerSelection == 'rock'){
-                
-                playerWin += 1  
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result) 
-
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
-
-        } else if(playerSelection == 'scissors'){
-            if(computerSelection == 'paper'){
-                
-                playerWin += 1 
-                result = `You won the round! ${playerSelection} beats ${computerSelection}`  
-                console.log(result)                     
-            } else{
-                computerWin += 1
-                result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
-                console.log(result) 
-            }    
+                if(computerSelection == 'paper'){
+                    
+                    playerWin += 1 
+                    result = `You won the round! ${playerSelection} beats ${computerSelection}`  
+                    console.log(result)                     
+                } else{
+                    computerWin += 1
+                    result = `You lost the round! ${computerSelection} beats ${playerSelection}`  
+                    console.log(result) 
+                }    
         } 
-    }
 }
 
 // CREATE A 5-ROUND GAME
@@ -270,20 +158,22 @@ getFinalScore = () => {
 }
 //REMATCH? If TRUTHY => play, else 'Thank you message'
 gameOver = () => {
-    let newGame = prompt('Would you like" to play a new game?','')
+    let newGame = prompt(`Would you like to play a new game? 
+    yes 
+    no`,``)
 
-    if(newGame){
-        console.log(game())
-    } else {
+    newGame = newGame.toLowerCase()
+
+    if(!(newGame) || newGame == 'no'){
         thankYouMessage = `Thank you for playing.`
         console.log(thankYouMessage)
+    } else {
+        console.log(game())
     }
 }
 
 //PLAY THE GAME
 game()
-
-
 
 
 //---------------> VERSION 1: <---------------
