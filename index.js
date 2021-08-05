@@ -1,9 +1,6 @@
 //This app pits a player against the computer in a game of rock-paper-scissors
 
 //---------------> VERSION 2: <---------------
-//note: playerPlay() allows 3 opportunities for the player to enter a truthy value in each round (and prompts the player to enter a correct entry if falsy value)
-//A valid entry within 3 tries allows for a round to be played and for the game move onto the next chronological round in the game
-
 let computerWin = 0
 let playerWin = 0
 let playerSelection
@@ -12,12 +9,12 @@ let result
 const rockPaperScissors = ['rock', 'paper', 'scissors']
 let score = []
 
-// CREATE A PLAY FROM THE COMPUTER: 
+// generate random play from the computer: 
 computerPlay = () =>{
     result = rockPaperScissors[Math.floor(Math.random()*3)]
     return result
 }
-// CREATE A PLAY FROM THE PLAYER: 
+// accept input play from the player (prompt valid entry)
 playerPlay = () => {
     result = prompt(`Please enter one of the following:
     rock
@@ -25,46 +22,31 @@ playerPlay = () => {
     scissors`, ``)
     result = result.toLowerCase()
 
-    //is result valid?
-    if((result) && (result == 'rock' || result == 'paper' || result == 'scissors')){
-        
-        return result   
-        
-    } else {
-        //1st time invalid entry 
+    // WHILE 'player_input is invalid', provide player with 5 tries for valid input in each round.
+    let counter = 0
+    while( !(result) || !((result == 'rock') || (result == 'paper') || (result == 'scissors')) ){
+        counter++
         result = prompt(`Invalid entry. Please enter one of the following:
         rock
         paper
         scissors`, ``)
         result = result.toLowerCase()
-        
-        //is result valid this time?
-        if(result && (result == 'rock' || result == 'paper' || result == 'scissors')){
+            if(counter === 5){
+                break;
+            }            
+    }//close while-loop 
 
-        return result    
 
-        } else {
-            //2nd time invalid entry
-            result = prompt(`Invalid entry. Please enter one of the following:
-            rock
-            paper
-            scissors`, ``)
-            result = result.toLowerCase()
+    // if player input is valid, break out of the while-loop with correct input value 
+    if( (result)  &&  ((result == 'rock') || (result == 'paper') || (result == 'scissors')) ) {
 
-            //is result valid this time?
-            if((result) && (result == 'rock' || result == 'paper' || result == 'scissors')){
+        return  result
                 
-            return result
+    } 
 
-            } else {
-                //3rd time invalid entry: 
-                gameOver()
-            }
-        }
-    }
-}
+} 
 
-// CREATE A SINGLE ROUND (PLAYER vs COMPUTER)
+// create a single round (player vs computer)
 playRound = (playerSelection, computerSelection) => {
     //computer plays
     computerSelection = computerPlay()
@@ -120,7 +102,7 @@ playRound = (playerSelection, computerSelection) => {
         } 
 }
 
-// CREATE A 5-ROUND GAME
+// create a 5-rounds game
 // 'game()' keeps score @ the end of each round 
 game = () => {
     for(let i = 0; i < 5; i++){
@@ -129,11 +111,14 @@ game = () => {
 
         console.log(`Round ${score[i]} =>  Player ${playerWin}:${computerWin} Computer`)
     }
-
+    
     getFinalScore()
-    gameOver()
+    score = [] //reset the score
+    playerWin = 0 //reset number of player wins
+    computerWin = 0 //reset number of computer wins
+    gameOver() // gameOver() can now restart the game if needed
 }
-// 'game()' reports a winner or loser @ end of the game
+
 getFinalScore = () => {
     if(playerWin > computerWin){
         let finalScore = 
@@ -156,7 +141,8 @@ getFinalScore = () => {
         console.log(finalScore)
     }
 }
-//REMATCH? If TRUTHY => play, else 'Thank you message'
+
+//rematch? 'if' truthy => play new game , 'else' => 'Thank you for playing'-message
 gameOver = () => {
     let newGame = prompt(`Would you like to play a new game? 
     yes 
@@ -165,14 +151,16 @@ gameOver = () => {
     newGame = newGame.toLowerCase()
 
     if(!(newGame) || newGame == 'no'){
+        //stop the game
         thankYouMessage = `Thank you for playing.`
         console.log(thankYouMessage)
     } else {
-        console.log(game())
+        //re-initialize the game
+        game()
     }
 }
 
-//PLAY THE GAME
+//play the game
 game()
 
 
